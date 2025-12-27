@@ -1608,9 +1608,17 @@ struct task_struct {
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 	ANDROID_KABI_RESERVE(5);
+#if defined(CONFIG_KSU_SUSFS)
+	ANDROID_KABI_USE(6, u64 susfs_task_state);
+#else
 	ANDROID_KABI_RESERVE(6);
+#endif // #if defined(CONFIG_KSU_SUSFS)
 	ANDROID_KABI_RESERVE(7);
+#if defined(CONFIG_KSU_SUSFS)
+	ANDROID_KABI_USE(8, u64 susfs_last_fake_mnt_id);
+#else
 	ANDROID_KABI_RESERVE(8);
+#endif
 #ifdef CONFIG_OPLUS_FEATURE_ABNORMAL_FLAG
 	int abnormal_flag;
 #endif
@@ -1648,6 +1656,13 @@ struct task_struct {
 	 * they are included in the randomized portion of task_struct.
 	 */
 	randomized_struct_fields_end
+
+#if defined(CONFIG_KSU_SUSFS) && !defined(ANDROID_KABI_RESERVE)
+	u64 susfs_task_state;
+#endif
+#if defined(CONFIG_KSU_SUSFS) && !defined(ANDROID_KABI_RESERVE)
+	u64 susfs_last_fake_mnt_id;
+#endif
 
 	/* CPU-specific state of this task: */
 	struct thread_struct		thread;
