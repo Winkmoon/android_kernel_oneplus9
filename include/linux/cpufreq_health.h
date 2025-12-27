@@ -1,0 +1,1 @@
+../../drivers/soc/oplus/cpufreq_health/cpufreq_health.h

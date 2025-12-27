@@ -1,0 +1,1 @@
+../../drivers/soc/oplus/cpufreq_effiency/cpufreq_effiency.h
